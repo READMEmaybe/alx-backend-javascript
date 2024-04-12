@@ -1,3 +1,5 @@
+import util from 'util';
+
 export default class Airport {
   constructor(name, code) {
     this._name = name;
@@ -28,5 +30,9 @@ export default class Airport {
 
   toString() {
     return `[object ${this._code}]`;
+  }
+
+  [util.inspect.custom]() {
+    return `${this.constructor.name} [${this._code}] { _name: '${this._name}', _code: '${this._code}' }`;
   }
 }
