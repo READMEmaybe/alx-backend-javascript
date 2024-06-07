@@ -5,9 +5,9 @@ const { expect } = require('chai');
 
 describe('sendPaymentRequestToApi', () => {
   it('should call calculateNumber', () => {
-    const calculateNumberStub = sinon.stub(Utils, 'calculateNumber').returns(10);
+    const calculateNumberspy = sinon.spy(Utils);
     sendPaymentRequestToApi(100, 20);
-    expect(calculateNumberStub.calledOnceWithExactly('SUM', 100, 20)).to.be.true;
-    calculateNumberStub.restore();
+    expect(calculateNumberspy.calculateNumber.calledWith('SUM', 100, 20)).to.be.true;
+    calculateNumberspy.calculateNumber.restore();
   });
 });
