@@ -6,11 +6,10 @@ class StudentsController {
     readDatabase(path)
       .then((data) => {
         response.write('This is the list of our students\n');
-        for (let field in data) {
+        Object.keys(data).forEach((field) => {
           response.write(`Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}\n`);
-        }
+        });
         response.end();
-        
       })
       .catch((err) => {
         response.status(500).send(`${err.message}`);
@@ -21,7 +20,7 @@ class StudentsController {
     const path = process.argv[2];
     readDatabase(path)
       .then((data) => {
-        const major = request.params.major;
+        const { major } = request.params;
         if (data[major]) {
           response.write(`List: ${data[major].join(', ')}\n`);
           response.end();
